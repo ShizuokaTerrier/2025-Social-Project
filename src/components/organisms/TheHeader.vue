@@ -29,6 +29,7 @@ style="fill:grey;"/>
 header {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 12px;
   padding: 5px;
   background-color: black;
