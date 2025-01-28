@@ -1,14 +1,12 @@
 <template>
-  <div class="SocialPost" :class="{ SocialPost__selected: selected }" @click="selected = !selected">
+  <div class="SocialPost" :class="{ SocialPost__selected: selected }" @click="onSelectedClick">
     <div class="header">
       <img class="avatar" :src="avatarSrc" alt="avatar" />
       <div class="name">{{ username }}</div>
       <div class="userId">{{ userId }}</div>
     </div>
     <div class="post">{{ post }}</div>
-    <button v-if="comments?.length ?? 0" @click="showComments = !showComments">
-      Show Comments
-    </button>
+    <button v-if="comments?.length ?? 0" @click="onShowComments">Show Comments</button>
   </div>
   <SocialPostComments v-if="showComments" :comments="comments" />
 </template>
@@ -24,6 +22,15 @@ const props = defineProps({
   post: String,
   comments: Array,
 })
+
+const onSelectedClick = () => {
+  selected.value = !selected.value
+}
+
+const onShowComments = () => {
+  showComments.value = !showComments.value
+}
+
 onMounted(() => {
   console.log(props.username)
 })
@@ -45,7 +52,7 @@ onMounted(() => {
   .name {
     font-weight: bold;
     margin-right: 8px;
-    color: white;
+    color: black;
   }
   border: 5px solid black;
   margin: 3px;
