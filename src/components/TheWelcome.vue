@@ -9,6 +9,8 @@ const posts = reactive([
     avatar: 'https://i.pravatar.cc/40',
     post: 'This is my post',
     comments: ['great post', 'amazing post'],
+    likes: 2,
+    retweets: 1,
     tags: ['tag 1'],
   },
   {
@@ -17,6 +19,8 @@ const posts = reactive([
     avatar: 'https://i.pravatar.cc/40',
     post: 'This is my second post',
     comments: [],
+    likes: 2,
+    retweets: 1,
     tags: ['tag 1', 'tag 2'],
   },
 ])
@@ -31,6 +35,8 @@ const posts = reactive([
       :avatarSrc="post.avatar"
       :post="post.post"
       :comments="post.comments"
+      :likes="post.likes"
+      :retweets="post.retweets"
       :tags="post.tags"
       :key="index"
     />

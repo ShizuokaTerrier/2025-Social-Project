@@ -6,12 +6,13 @@
       <div class="userId">{{ userId }}</div>
     </div>
     <div class="post">{{ post }}</div>
-    <button v-if="comments?.length ?? 0" @click="onShowComments">Show Comments</button>
+    <div class="interactions">Interactions:{{ interactions }}</div>
+    <button v-if="hasComments" @click="onShowComments">Show Comments</button>
   </div>
   <SocialPostComments v-if="showComments" :comments="comments" />
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import SocialPostComments from './SocialPostComments.vue'
 const selected = ref(false)
 const showComments = ref(false)
@@ -21,6 +22,8 @@ const props = defineProps({
   avatarSrc: String,
   post: String,
   comments: Array,
+  likes: Number || undefined,
+  retweets: Number || undefined,
 })
 
 const onSelectedClick = () => {
@@ -30,6 +33,16 @@ const onSelectedClick = () => {
 const onShowComments = () => {
   showComments.value = !showComments.value
 }
+
+const hasComments = computed(() => {
+  return props.comments?.length ?? 0
+})
+
+const interactions = computed(() => {
+  const totalInteractions =
+    (props.comments?.length || 0) + (props.likes || 0) + (props.retweets || 0)
+  return totalInteractions
+})
 
 onMounted(() => {
   console.log(props.username)
@@ -54,9 +67,16 @@ onMounted(() => {
     margin-right: 8px;
     color: black;
   }
+  .interactions {
+    font-weight: bold;
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
   border: 5px solid black;
-  margin: 3px;
+  margin: 3px auto;
   padding: 5px;
   border-radius: 10px;
+  min-width: 60%;
+  max-width: fit-content;
 }
 </style>
