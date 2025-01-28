@@ -4,6 +4,7 @@
       <img class="avatar" :src="avatarSrc" alt="avatar" />
       <div class="name">{{ username }}</div>
       <div class="userId">{{ userId }}</div>
+      <IconDelete @click="onDeleteClick" />
     </div>
     <div class="post">{{ post }}</div>
     <div class="interactions">Interactions:{{ interactions }}</div>
@@ -14,10 +15,14 @@
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue'
 import SocialPostComments from './SocialPostComments.vue'
+import IconDelete from '../icons/IconDelete.vue'
 const selected = ref(false)
 const showComments = ref(false)
 const props = defineProps({
-  username: String,
+  username: {
+    type: String,
+    default: 'Mystery User!',
+  },
   userId: String,
   avatarSrc: String,
   post: String,
@@ -47,6 +52,10 @@ const interactions = computed(() => {
 onMounted(() => {
   console.log(props.username)
 })
+const emit = defineEmits(['delete'])
+const onDeleteClick = () => {
+  emit('delete')
+}
 </script>
 <style lang="scss">
 .SocialPost {
@@ -66,7 +75,7 @@ onMounted(() => {
   .name {
     font-weight: bold;
     margin-right: 8px;
-    color: white;
+    color: black;
   }
   .interactions {
     display: flex;

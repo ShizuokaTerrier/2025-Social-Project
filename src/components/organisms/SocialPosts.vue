@@ -11,6 +11,7 @@
       :retweets="post.retweets"
       :tags="post.tags"
       :key="post.userId"
+      @delete="onDelete"
     />
   </div>
 </template>
@@ -41,6 +42,10 @@ const posts = reactive([
     tags: ['tag 1', 'tag 2'],
   },
 ])
+
+const onDelete = () => {
+  posts.splice(0, 1)
+}
 </script>
 
 <style></style>

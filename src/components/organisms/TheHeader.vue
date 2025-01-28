@@ -1,22 +1,16 @@
 <template>
   <header>
-    <div v-html="logo"></div>
-
+    <TheLogo />
     <h1>Companion App</h1>
-    <a href="#"> Welcome <span v-text="username"></span> </a>
+    <a href="#"> Welcome {{ username }} </a>
+    <IconSettings class="settings" />
   </header>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import TheLogo from '../atoms/TheLogo.vue'
+import IconSettings from '../icons/IconSettings.vue'
 const username = ref('Matt')
-const logo = `<svg
-height="50"
-width="50"
-viewbox="0 0 210 210">
-<polygon
-points="100,10 40,198 190,78 10,78 160,198"
-style="fill:grey;"/>
-</svg>`
 </script>
 <style lang="scss">
 header {
@@ -27,7 +21,7 @@ header {
   grid-column-start: 1;
   grid-column-end: 3;
   padding-bottom: 24px;
-  border-bottom: solid 1px black;
+  border-bottom: solid 1px var(--color-border);
 
   .span {
     display: flex;
@@ -37,6 +31,11 @@ header {
     line-height: 24px;
     margin-right: 8px;
     font-weight: bolder;
+  }
+  .settings {
+    width: 16px;
+    height: 16px;
+    fill: var(--color-input-mute);
   }
 }
 </style>
