@@ -17,14 +17,13 @@ const currentYear = ref(new Date().getFullYear())
 
 <style scoped lang="scss">
 .StaticFooter {
-  min-height: 100%;
-  min-width: 100%;
-}
-footer {
-  display: flex;
-  justify-content: center;
-  padding: 5px;
   background-color: black;
-  color: #fff;
+  color: white;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 </style>

@@ -1,12 +1,10 @@
 <template>
-  <div class="TheHeader">
-    <header>
-      <div v-html="logo"></div>
+  <header>
+    <div v-html="logo"></div>
 
-      <h1>Companion App</h1>
-      <a href="#"> Welcome <span v-text="username"></span> </a>
-    </header>
-  </div>
+    <h1>Companion App</h1>
+    <a href="#"> Welcome <span v-text="username"></span> </a>
+  </header>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -21,18 +19,24 @@ style="fill:grey;"/>
 </svg>`
 </script>
 <style lang="scss">
-.theHeader {
-  min-height: 100%;
-  min-width: 100%;
-  padding: 5px;
-}
 header {
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 12px;
-  padding: 5px;
-  background-color: black;
-  color: #fff;
+  justify-content: space-between;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding-bottom: 24px;
+  border-bottom: solid 1px black;
+
+  .span {
+    display: flex;
+  }
+  a {
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: 8px;
+    font-weight: bolder;
+  }
 }
 </style>

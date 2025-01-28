@@ -50,8 +50,9 @@ onMounted(() => {
 </script>
 <style lang="scss">
 .SocialPost {
+  margin-bottom: 16px;
   &__selected {
-    border: 5px solid blue;
+    border: white solid 1px;
   }
   .header {
     display: flex;
@@ -65,18 +66,18 @@ onMounted(() => {
   .name {
     font-weight: bold;
     margin-right: 8px;
-    color: black;
+    color: white;
   }
   .interactions {
+    display: flex;
     font-weight: bold;
-    margin-top: 6px;
-    margin-bottom: 6px;
+    margin-top: 8px;
+    gap: 8px;
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--color-border);
+    }
   }
-  border: 5px solid black;
-  margin: 3px auto;
-  padding: 5px;
-  border-radius: 10px;
-  min-width: 60%;
-  max-width: fit-content;
 }
 </style>
