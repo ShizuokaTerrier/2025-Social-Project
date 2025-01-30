@@ -1,7 +1,7 @@
 <template>
   <div>
     <SocialPost
-      v-for="post in posts"
+      v-for="(post, index) in posts"
       :username="post.username"
       :userId="post.userId"
       :avatarSrc="post.avatar"
@@ -11,40 +11,38 @@
       :retweets="post.retweets"
       :tags="post.tags"
       :key="post.userId"
-      @delete="onDelete"
+      @delete="onDelete(index)"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref, onMounted } from 'vue'
 import SocialPost from '../molecules/SocialPost.vue'
 
-const posts = reactive([
-  {
-    username: 'Username one',
-    userId: 'usernameId1',
-    avatar: 'https://i.pravatar.cc/40',
-    post: 'This is my post',
-    comments: ['great post', 'amazing post'],
-    likes: 2,
-    retweets: 1,
-    tags: ['tag 1'],
-  },
-  {
-    username: 'Username two',
-    userId: 'usernameId2',
-    avatar: 'https://i.pravatar.cc/40',
-    post: 'This is my second post',
-    comments: [],
-    likes: 2,
-    retweets: 1,
-    tags: ['tag 1', 'tag 2'],
-  },
-])
+interface Post {
+  username: string
+  userId: string
+  avatar: string
+  post: string
+  comments: string[]
+  likes: number
+  retweets: number
+  tags: string[]
+}
 
-const onDelete = () => {
-  posts.splice(0, 1)
+type PostsResponse = Post[]
+
+const posts = ref<PostsResponse>([])
+
+onMounted(async () => {
+  const response = await fetch('http://127.0.0.1:8000/posts?limit=3')
+  const data: PostsResponse = await response.json()
+  posts.value = data
+})
+
+const onDelete = (postIndex: number) => {
+  posts.value.splice(postIndex, 1)
 }
 </script>
 
